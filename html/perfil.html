@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tabela de Funcionários</title>
+
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f4f6f9;
+      padding: 20px;
+    }
+
+    table {
+      width: 100%;
+      margin: 20px 0;
+      border-collapse: collapse;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    table th,
+    table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    table th {
+      background-color: #2563eb;
+      color: white;
+    }
+
+    table td {
+      color: #333;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .update-btn {
+      background-color: #4caf50;
+      color: white;
+      cursor: pointer;
+    }
+
+    .update-btn:hover {
+      background-color: #45a049;
+    }
+
+    .delete-btn {
+      background-color: #f44336;
+      color: white;
+      cursor: pointer;
+    }
+
+    .delete-btn:hover {
+      background-color: #e53935;
+    }
+
+    .form-container {
+      display: none;
+      margin-top: 30px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .form-container button {
+      width: 100%;
+      padding: 10px;
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .form-container button:hover {
+      background-color: #1d4ed8;
+    }
+
+
+    .navbar {
+      background-color: #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 10;
+    }
+
+    .navbar .logo {
+      font-size: 20px;
+      font-weight: bold;
+      color: #2563eb;
+    }
+
+    .navbar ul {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .navbar ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .navbar ul li a:hover {
+      background-color: #e0e7ff;
+      color: #2563eb;
+    }
+
+    .content {
+      padding: 100px 30px 30px 30px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .card h2 {
+      font-size: 24px;
+      color: #333;
+    }
+
+    .card p {
+      color: #666;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .navbar ul {
+        flex-direction: column;
+        background-color: #fff;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        display: none;
+      }
+
+      .navbar ul.show {
+        display: flex;
+      }
+    }
+  </style>
+
+
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <div class="logo">Painel Administrativo</div>
+    <ul>
+      <li><a href="http://localhost:8080/html/funcionarios.html">Funcionários</a></li>
+      <li><a href="http://localhost:8080/html/perfil.html">Perfil</a></li>
+      <li><a href="http://localhost:8080/html/departamento.html">Departamentos</a></li>
+      <li><a href="http://localhost:8080/html/historicoCargos.html">Históricos de Cargos</a></li>
+      <li><a href="http://localhost:8080/html/dados.html">Relatórios</a></li>
+    </ul>
+  </nav>
+
+  <h1 style="text-align: center; color: #333;"><br>Tabela de Peril</h1>
+
+  <div style="display: flex; justify-content: flex-end; margin-bottom: 20px;">
+    <button style="
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    " onclick="mostrarFormularioAdicao()">+ Adicionar Perfil</button>
+  </div>
+
+  <table id="funcionarios-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>ID Funcionário</th>
+        <th>IDADE</th>
+        <th>ENDEREÇO</th>
+        <th>TELEFONE</th>
+        <th>GENERO</th>
+        <th>ESTADO CIVIL</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+  </table>
+
+  <div class="form-container" id="form-container">
+    <h2>Editar Perfil</h2>
+    <form id="edit-form">
+      <input type="number" id="edit-id_funcionario" placeholder="Id Funcionário" required />
+      <input type="number" id="edit-idade" placeholder="Idade" required />
+      <input type="text" id="edit-endereco" placeholder="Endereço" required />
+      <input type="text" id="edit-telefone" placeholder="Telefone" required />
+      <input type="text" id="edit-genero" placeholder="Genero" />
+      <input type="text" id="edit-estado_civil" placeholder="Estado Civil" required />
+      <button type="submit">Salvar Alterações</button>
+    </form>
+  </div>
+
+  <script>
+
+    function preencherTabela(perfis) {
+      const tbody = document.querySelector('#funcionarios-table tbody');
+      tbody.innerHTML = '';
+
+      perfis.forEach(perfil => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+        <td>${perfil.id}</td>
+        <td>${perfil.id_funcionario}</td>
+        <td>${perfil.idade}</td>
+        <td>${perfil.endereco}</td>
+        <td>${perfil.telefone}</td>
+        <td>${perfil.genero || 'Não informado'}</td>
+        <td>${perfil.estado_civil}</td>
+        <td>
+          <div class="button-container">
+            <button class="update-btn" onclick="atualizarPerfil(${perfil.id})">Atualizar</button>
+            <button class="delete-btn" onclick="excluirPerfil(${perfil.id})">Excluir</button>
+          </div>
+        </td>
+      `;
+        tbody.appendChild(row);
+      });
+    }
+
+    function atualizarPerfil(id) {
+      alert(`Atualizando perfil com ID: ${id}`);
+      const formContainer = document.getElementById('form-container');
+      formContainer.style.display = 'block';
+
+      selecionarPerfilById(id)
+        .then(perfil => {
+          document.getElementById('edit-id_funcionario').value = perfil.id_funcionario;
+          document.getElementById('edit-idade').value = perfil.idade;
+          document.getElementById('edit-endereco').value = perfil.endereco;
+          document.getElementById('edit-telefone').value = perfil.telefone;
+          document.getElementById('edit-genero').value = perfil.genero || '';
+          document.getElementById('edit-estado_civil').value = perfil.estado_civil;
+
+          document.getElementById('edit-form').onsubmit = function (e) {
+            e.preventDefault();
+
+            const id_funcionario = document.getElementById('edit-id_funcionario').value;
+            const idade = document.getElementById('edit-idade').value;
+            const endereco = document.getElementById('edit-endereco').value;
+            const telefone = document.getElementById('edit-telefone').value;
+            const genero = document.getElementById('edit-genero').value;
+            const estado_civil = document.getElementById('edit-estado_civil').value;
+
+            const token = localStorage.getItem('token');
+            if (token) {
+              fetch('http://localhost:8080/perfis', {
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                  id,
+                  id_funcionario,
+                  idade,
+                  endereco,
+                  telefone,
+                  genero,
+                  estado_civil
+                })
+              })
+                .then(response => response.json())
+                .then(data => {
+                  if (data.cod === 200) {
+                    alert('Perfil atualizado com sucesso!');
+                    preencherTabela(data.perfis);
+                  } else {
+                    alert('Erro: ' + data.msg);
+                  }
+                })
+                .catch(error => {
+                  console.error('Erro ao atualizar perfil:', error);
+                  alert('Erro ao tentar atualizar o perfil.');
+                });
+
+              formContainer.style.display = 'none';
+            } else {
+              alert('Token não encontrado. Por favor, faça login.');
+            }
+          };
+        })
+        .catch(error => {
+          alert(error);
+        });
+    }
+
+    function selecionarPerfilById(id) {
+      return new Promise((resolve, reject) => {
+        const token = localStorage.getItem('token');
+        if (token) {
+          fetch(`http://localhost:8080/perfis/${id}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            }
+          })
+            .then(response => response.json())
+            .then(data => {
+              if (data.cod === 200) {
+                resolve(data.perfil);
+              } else {
+                reject('Erro: ' + data.msg);
+              }
+            })
+            .catch(error => {
+              console.error('Erro ao buscar dados:', error);
+              reject('Erro ao tentar buscar dados do perfil.');
+            });
+        } else {
+          reject('Token não encontrado. Por favor, faça login.');
+        }
+      });
+    }
+
+    async function excluirPerfil(id) {
+      const token = localStorage.getItem('token');
+      try {
+        const perfil = await selecionarPerfilById(id);
+        alert(`Excluindo perfil com ID: ${perfil.id}, ID Funcionário: ${perfil.id_funcionario}`);
+
+        if (token) {
+          fetch(`http://localhost:8080/perfis/${id}`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            }
+          })
+            .then(response => response.json())
+            .then(data => {
+              if (data.cod === 200) {
+                alert("Perfil excluído com sucesso!");
+                preencherTabela(data.perfis); 
+              } else {
+                alert('Erro: ' + data.msg);
+              }
+            })
+            .catch(error => {
+              console.error('Erro ao excluir perfil:', error);
+              alert('Erro ao tentar excluir o perfil.');
+            });
+        } else {
+          alert('Token não encontrado. Por favor, faça login.');
+        }
+      } catch (error) {
+        alert('Erro ao buscar os dados do perfil: ' + error);
+      }
+    }
+
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      fetch('http://localhost:8080/perfis', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.cod === 200 && Array.isArray(data.perfis) && data.perfis.length > 0) {
+            preencherTabela(data.perfis); 
+          } else {
+            alert('Erro: ' + data.msg);
+          }
+        })
+        .catch(error => {
+          console.error('Erro ao buscar dados:', error);
+          alert('Erro ao tentar buscar dados dos perfis.');
+        });
+    } else {
+      alert('Token não encontrado. Por favor, faça login.');
+    }
+
+    function mostrarFormularioAdicao() {
+      const formContainer = document.getElementById('form-container');
+      formContainer.style.display = 'block';
+
+      document.getElementById('edit-id_funcionario').value = '';
+      document.getElementById('edit-idade').value = '';
+      document.getElementById('edit-endereco').value = '';
+      document.getElementById('edit-telefone').value = '';
+      document.getElementById('edit-genero').value = '';
+      document.getElementById('edit-estado_civil').value = '';
+
+      document.getElementById('edit-form').onsubmit = function (e) {
+        e.preventDefault();
+
+        const id_funcionario = document.getElementById('edit-id_funcionario').value;
+        const idade = document.getElementById('edit-idade').value;
+        const endereco = document.getElementById('edit-endereco').value;
+        const telefone = document.getElementById('edit-telefone').value;
+        const genero = document.getElementById('edit-genero').value;
+        const estado_civil = document.getElementById('edit-estado_civil').value;
+
+        const token = localStorage.getItem('token');
+        if (token) {
+          fetch('http://localhost:8080/perfis', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+              id_funcionario,
+              idade,
+              endereco,
+              telefone,
+              genero,
+              estado_civil
+            })
+          })
+            .then(response => response.json())
+            .then(data => {
+              if (data.cod === 201 || data.cod === 200) {
+                alert('Perfil adicionado com sucesso!');
+                preencherTabela(data.perfis);
+                formContainer.style.display = 'none';
+              } else {
+                alert('Erro ao adicionar perfil: ' + data.msg);
+              }
+            })
+            .catch(error => {
+              console.error('Erro ao adicionar perfil:', error);
+              alert('Erro ao tentar adicionar perfil.');
+            });
+        } else {
+          alert('Token não encontrado. Por favor, faça login.');
+        }
+      };
+    }
+
+  </script>
+
+
+
+</body>
+
+</html>

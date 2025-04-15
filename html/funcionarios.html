@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tabela de Funcionários</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f4f6f9;
+      padding: 20px;
+    }
+
+    table {
+      width: 100%;
+      margin: 20px 0;
+      border-collapse: collapse;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    table th,
+    table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    table th {
+      background-color: #2563eb;
+      color: white;
+    }
+
+    table td {
+      color: #333;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .update-btn {
+      background-color: #4caf50;
+      color: white;
+      cursor: pointer;
+    }
+
+    .update-btn:hover {
+      background-color: #45a049;
+    }
+
+    .delete-btn {
+      background-color: #f44336;
+      color: white;
+      cursor: pointer;
+    }
+
+    .delete-btn:hover {
+      background-color: #e53935;
+    }
+
+    .form-container {
+      display: none;
+      margin-top: 30px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .form-container button {
+      width: 100%;
+      padding: 10px;
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .form-container button:hover {
+      background-color: #1d4ed8;
+    }
+
+
+    .navbar {
+      background-color: #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 10;
+    }
+
+    .navbar .logo {
+      font-size: 20px;
+      font-weight: bold;
+      color: #2563eb;
+    }
+
+    .navbar ul {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .navbar ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .navbar ul li a:hover {
+      background-color: #e0e7ff;
+      color: #2563eb;
+    }
+
+    .content {
+      padding: 100px 30px 30px 30px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .card h2 {
+      font-size: 24px;
+      color: #333;
+    }
+
+    .card p {
+      color: #666;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .navbar ul {
+        flex-direction: column;
+        background-color: #fff;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        display: none;
+      }
+
+      .navbar ul.show {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <div class="logo">Painel Administrativo</div>
+    <ul>
+      <li><a href="http://localhost:8080/html/funcionarios.html">Funcionários</a></li>
+      <li><a href="http://localhost:8080/html/perfil.html">Perfil</a></li>
+      <li><a href="http://localhost:8080/html/departamento.html">Departamentos</a></li>
+      <li><a href="http://localhost:8080/html/historicoCargos.html">Históricos de Cargos</a></li>
+      <li><a href="http://localhost:8080/html/dados.html">Relatórios</a></li>
+    </ul>
+  </nav>
+
+  <h1 style="text-align: center; color: #333;"><br>Tabela de Funcionários</h1>
+
+  <div style="text-align: center; margin-top: 20px;">
+    <button onclick="mostrarFormularioInsercao()"
+      style="padding: 10px 20px; background-color: #2563eb; color: white; border: none; border-radius: 8px; cursor: pointer;">Inserir
+      Novo Funcionário</button>
+  </div>
+
+  <table id="funcionarios-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>CPF</th>
+        <th>Cargo</th>
+        <th>Salário</th>
+        <th>Data de Contratação</th>
+        <th>Departamento</th>
+        <th>Supervisor</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+  </table>
+
+  <div class="form-container" id="form-container">
+    <h2>Editar Funcionário</h2>
+    <form id="edit-form">
+      <input type="text" id="edit-nome" placeholder="Nome" required />
+      <input type="email" id="edit-email" placeholder="Email" required />
+      <input type="text" id="edit-cpf" placeholder="CPF" required />
+      <input type="text" id="edit-cargo" placeholder="Cargo" required />
+      <input type="number" id="edit-salario" placeholder="Salário" />
+      <input type="date" id="edit-data-contratacao" placeholder="Data de Contratação" required />
+      <input type="text" id="edit-departamento" placeholder="Departamento" />
+      <input type="text" id="edit-supervisor" placeholder="Supervisor" />
+      <button type="submit">Salvar Alterações</button>
+    </form>
+  </div>
+
+  <div class="form-container" id="inserir-form-container">
+    <h2>Inserir Novo Funcionário</h2>
+    <form id="inserir-form">
+      <input type="text" id="novo-nome" placeholder="Nome" required />
+      <input type="email" id="novo-email" placeholder="Email" required />
+      <input type="text" id="novo-cpf" placeholder="CPF" required />
+      <input type="text" id="novo-cargo" placeholder="Cargo" required />
+      <input type="number" id="novo-salario" placeholder="Salário" />
+      <input type="date" id="novo-data-contratacao" placeholder="Data de Contratação" required />
+      <input type="text" id="novo-departamento" placeholder="Departamento" />
+      <input type="text" id="novo-supervisor" placeholder="Supervisor" />
+      <button type="submit">Cadastrar Funcionário</button>
+    </form>
+  </div>
+
+
+  <script>
+
+    function preencherTabela(funcionarios) {
+      const tbody = document.querySelector('#funcionarios-table tbody');
+      tbody.innerHTML = '';
+      funcionarios.forEach(funcionario => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${funcionario.id}</td>
+          <td>${funcionario.nome}</td>
+          <td>${funcionario.email}</td>
+          <td>${funcionario.cpf}</td>
+          <td>${funcionario.cargo}</td>
+          <td>${funcionario.salario ? funcionario.salario : 'Não disponível'}</td>
+          <td>${funcionario.data_contratacao}</td>
+          <td>${funcionario.departamento ? funcionario.departamento : 'Não atribuído'}</td>
+          <td>${funcionario.funcionario_supervisor ? funcionario.funcionario_supervisor : 'Não atribuído'}</td>
+          <td>
+            <div class="button-container">
+              <button class="update-btn" onclick="atualizarFuncionario(${funcionario.id})">Atualizar</button>
+              <button class="delete-btn" onclick="excluirFuncionario(${funcionario.id})">Excluir</button>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    function atualizarFuncionario(id) {
+      alert(`Atualizando funcionário com ID: ${id}`);
+
+      const formContainer = document.getElementById('form-container');
+      formContainer.style.display = 'block';
+
+      selecionarById(id)
+        .then(funcionario => {
+          document.getElementById('edit-nome').value = funcionario.nome;
+          document.getElementById('edit-email').value = funcionario.email;
+          document.getElementById('edit-cpf').value = funcionario.cpf;
+          document.getElementById('edit-cargo').value = funcionario.cargo;
+          document.getElementById('edit-salario').value = funcionario.salario;
+          document.getElementById('edit-data-contratacao').value = funcionario['data da contratacao'];
+          document.getElementById('edit-departamento').value = funcionario.departamento || '';
+          document.getElementById('edit-supervisor').value = funcionario.supervisor || '';
+
+          document.getElementById('edit-form').onsubmit = function (e) {
+            e.preventDefault();
+
+            const nome = document.getElementById('edit-nome').value;
+            const email = document.getElementById('edit-email').value;
+            const cpf = document.getElementById('edit-cpf').value;
+            const cargo = document.getElementById('edit-cargo').value;
+            const salario = document.getElementById('edit-salario').value;
+            const data_contratacao = document.getElementById('edit-data-contratacao').value;
+            const departamento = document.getElementById('edit-departamento').value;
+            const supervisor = document.getElementById('edit-supervisor').value;
+
+            const token = localStorage.getItem('token');
+            if (token) {
+              fetch('http://localhost:8080/funcionarios', {
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                  "id": id,
+                  "nome": nome,
+                  "email": email,
+                  "cpf": cpf,
+                  "cargo": cargo,
+                  "salario": salario,
+                  "data_contratacao": data_contratacao,
+                  "departamento": departamento,
+                  "funcionario_supervisor": supervisor
+                })
+              })
+                .then(response => response.json())
+                .then(data => {
+                  if (data.cod === 200) { 
+                    alert('Funcionário atualizado com sucesso!');
+                  } else {
+                    alert('Erro: ' + data.msg); 
+                  }
+                })
+                .catch(error => {
+                  console.error('Erro ao atualizar dados do funcionário:', error);
+                  alert('Erro ao tentar atualizar os dados do funcionário.');
+                });
+            } else {
+              alert('Token não encontrado. Por favor, faça login.');
+            }
+
+            formContainer.style.display = 'none';
+          };
+        })
+        .catch(error => {
+          alert(error);
+        }
+        );
+    }
+
+
+    function selecionarById(id) {
+      return new Promise((resolve, reject) => {
+        const token = localStorage.getItem('token');
+
+        if (token) {
+          fetch(`http://localhost:8080/funcionarios/${id}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+          })
+            .then(response => response.json())
+            .then(data => {
+              if (data.cod === 200) { 
+                resolve(data.funcionario); 
+              } else {
+                reject('Erro: ' + data.msg); 
+              }
+            })
+            .catch(error => {
+              console.error('Erro ao buscar dados:', error);
+              reject('Erro ao tentar buscar dados do funcionário.');
+            });
+        } else {
+          reject('Token não encontrado. Por favor, faça login.');
+        }
+      });
+    }
+
+    async function excluirFuncionario(id) {
+      const token = localStorage.getItem('token');
+
+      try {
+        const funcionario = await selecionarById(id);
+        alert(`Excluindo funcionário com ID: ${funcionario.id}, Nome: ${funcionario.nome}`);
+
+        if (token) {
+          fetch(`http://localhost:8080/funcionarios/${id}`, { 
+            method: 'DELETE',  
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+          })
+            .then(response => response.json())
+            .then(data => {
+              if (data.cod == 200) {
+                alert("Funcionário excluído com sucesso!");
+                preencherTabela(data.funcionarios); 
+              } else {
+                alert('Erro: ' + data.cod);
+              }
+            })
+            .catch(error => {
+              console.error('Erro ao excluir o funcionário:', error);
+              alert('Erro ao tentar excluir o funcionário.');
+            });
+        } else {
+          alert('Token não encontrado. Por favor, faça login.');
+        }
+      } catch (error) {
+        alert('Erro ao buscar os dados do funcionário: ' + error);
+      }
+    }
+
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      fetch('http://localhost:8080/funcionarios', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (Array.isArray(data) && data.length > 0) {
+            preencherTabela(data);
+          } else {
+            alert('Erro: Dados de funcionários não encontrados.');
+          }
+        })
+        .catch(error => {
+          console.error('Erro ao buscar dados:', error);
+          alert('Erro ao tentar buscar dados dos funcionários.');
+        });
+    } else {
+      alert('Token não encontrado. Por favor, faça login.');
+    }
+
+    function mostrarFormularioInsercao() {
+      document.getElementById('inserir-form-container').style.display = 'block';
+    }
+
+    document.getElementById('inserir-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const nome = document.getElementById('novo-nome').value;
+      const email = document.getElementById('novo-email').value;
+      const cpf = document.getElementById('novo-cpf').value;
+      const cargo = document.getElementById('novo-cargo').value;
+      const salario = document.getElementById('novo-salario').value;
+      const data_contratacao = document.getElementById('novo-data-contratacao').value;
+      const departamento = document.getElementById('novo-departamento').value;
+      const supervisor = document.getElementById('novo-supervisor').value;
+
+      const token = localStorage.getItem('token');
+
+      if (token) {
+        fetch('http://localhost:8080/funcionarios', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            "nome": nome,
+            "email": email,
+            "cpf": cpf,
+            "cargo": cargo,
+            "salario": salario,
+            "data_contratacao": data_contratacao,
+            "departamento": departamento,
+            "funcionario_supervisor": supervisor
+          })
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.cod === 201 || data.cod === 200) {
+              alert('Funcionário inserido com sucesso!');
+              document.getElementById('inserir-form-container').style.display = 'none';
+              location.reload();
+            } else {
+              alert('Erro ao inserir: ' + data.msg);
+            }
+          })
+          .catch(error => {
+            console.error('Erro ao inserir funcionário:', error);
+            alert('Erro ao tentar inserir o funcionário.');
+          });
+      } else {
+        alert('Token não encontrado. Por favor, faça login.');
+      }
+    });
+
+  </script>
+
+</body>
+
+</html>

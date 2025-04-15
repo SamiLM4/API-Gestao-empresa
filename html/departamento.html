@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tabela de Departamentos</title>
+
+  <style>
+    /* Reset de estilos */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Corpo */
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f4f6f9;
+      padding: 20px;
+    }
+
+    /* Tabela */
+    table {
+      width: 100%;
+      margin: 20px 0;
+      border-collapse: collapse;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    table th,
+    table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    table th {
+      background-color: #2563eb;
+      color: white;
+    }
+
+    table td {
+      color: #333;
+    }
+
+    /* Botões */
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .update-btn {
+      background-color: #4caf50;
+      color: white;
+      cursor: pointer;
+    }
+
+    .update-btn:hover {
+      background-color: #45a049;
+    }
+
+    .delete-btn {
+      background-color: #f44336;
+      color: white;
+      cursor: pointer;
+    }
+
+    .delete-btn:hover {
+      background-color: #e53935;
+    }
+
+    /* Formulário de Edição */
+    .form-container {
+      display: none;
+      margin-top: 30px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .form-container button {
+      width: 100%;
+      padding: 10px;
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .form-container button:hover {
+      background-color: #1d4ed8;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 10;
+    }
+
+    .navbar .logo {
+      font-size: 20px;
+      font-weight: bold;
+      color: #2563eb;
+    }
+
+    .navbar ul {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .navbar ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .navbar ul li a:hover {
+      background-color: #e0e7ff;
+      color: #2563eb;
+    }
+
+    .content {
+      padding: 100px 30px 30px 30px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <div class="logo">Painel Administrativo</div>
+    <ul>
+      <li><a href="http://localhost:8080/html/funcionarios.html">Funcionários</a></li>
+      <li><a href="http://localhost:8080/html/perfil.html">Perfil</a></li>
+      <li><a href="http://localhost:8080/html/departamento.html">Departamentos</a></li>
+      <li><a href="http://localhost:8080/html/historicoCargos.html">Históricos de Cargos</a></li>
+      <li><a href="http://localhost:8080/html/dados.html">Relatórios</a></li>
+    </ul>
+  </nav>
+
+  <h1 style="text-align: center; color: #333;"><br>Tabela de Departamentos</h1>
+
+  <div style="display: flex; justify-content: flex-end; margin-bottom: 20px;">
+    <button
+      style="background-color: #2563eb; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-size: 16px; cursor: pointer; transition: background-color 0.3s;"
+      onclick="mostrarFormularioAdicao()">+ Adicionar Departamento</button>
+  </div>
+
+  <table id="departamentos-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome Departamento</th>
+        <th>Orçamento</th>
+        <th>Localização</th>
+        <th>Data Criação</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+  </table>
+
+  <div class="form-container" id="form-container">
+    <h2>Editar Departamento</h2>
+    <form id="edit-form">
+      <input type="text" id="edit-nome_departamento" placeholder="Nome do Departamento" required />
+      <input type="number" id="edit-orcamento" placeholder="Orçamento" step="0.01" required />
+      <input type="text" id="edit-localizacao" placeholder="Localização" required />
+      <input type="date" id="edit-data_criacao" required />
+      <button type="submit">Salvar Alterações</button>
+    </form>
+  </div>
+
+  <script>
+
+    function preencherTabela(departamentos) {
+      const tbody = document.querySelector('#departamentos-table tbody');
+      tbody.innerHTML = '';
+
+      departamentos.forEach(departamento => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${departamento.id}</td>
+          <td>${departamento.nome_departamento}</td>
+          <td>${departamento.orcamento}</td>
+          <td>${departamento.localizacao}</td>
+          <td>${departamento.data_criacao}</td>
+          <td>
+            <div class="button-container">
+              <button class="update-btn" onclick="atualizarDepartamento(${departamento.id})">Atualizar</button>
+              <button class="delete-btn" onclick="excluirDepartamento(${departamento.id})">Excluir</button>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    function atualizarDepartamento(id) {
+      alert(`Atualizando departamento com ID: ${id}`);
+      const formContainer = document.getElementById('form-container');
+      formContainer.style.display = 'block';
+
+      selecionarDepartamentoById(id)
+        .then(departamento => {
+          document.getElementById('edit-nome_departamento').value = departamento.nome_departamento;
+          document.getElementById('edit-orcamento').value = departamento.orcamento;
+          document.getElementById('edit-localizacao').value = departamento.localizacao;
+          document.getElementById('edit-data_criacao').value = departamento.data_criacao;
+
+          document.getElementById('edit-form').onsubmit = function (e) {
+            e.preventDefault();
+
+            const nome_departamento = document.getElementById('edit-nome_departamento').value;
+            const orcamento = document.getElementById('edit-orcamento').value;
+            const localizacao = document.getElementById('edit-localizacao').value;
+            const data_criacao = document.getElementById('edit-data_criacao').value;
+
+            const token = localStorage.getItem('token');
+            if (token) {
+              fetch('http://localhost:8080/departamentos', {
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                  id,
+                  nome_departamento,
+                  orcamento,
+                  localizacao,
+                  data_criacao
+                })
+              })
+                .then(response => response.json())
+                .then(data => {
+                  if (data.cod === 200) {
+                    alert('Departamento atualizado com sucesso!');
+                    preencherTabela(data.departamentos);
+                  } else {
+                    alert('Erro: ' + data.msg);
+                  }
+                })
+                .catch(error => {
+                  console.error('Erro ao atualizar departamento:', error);
+                  alert('Erro ao tentar atualizar o departamento.');
+                });
+
+              formContainer.style.display = 'none';
+            } else {
+              alert('Token não encontrado. Por favor, faça login.');
+            }
+          };
+        })
+        .catch(error => {
+          alert(error);
+        });
+    }
+
+
+    function selecionarDepartamentoById(id) {
+      return new Promise((resolve, reject) => {
+        const token = localStorage.getItem('token');
+        if (token) {
+          fetch(`http://localhost:8080/departamentos/${id}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            }
+          })
+            .then(response => response.json())
+            .then(data => {
+              if (data.cod === 200) {
+                resolve(data.departamento); 
+              } else {
+                reject('Erro: ' + data.msg);
+              }
+            })
+            .catch(error => {
+              console.error('Erro ao buscar dados:', error);
+              reject('Erro ao tentar buscar dados do departamento.');
+            });
+        } else {
+          reject('Token não encontrado. Por favor, faça login.');
+        }
+      });
+    }
+
+    async function excluirDepartamento(id) {
+      const token = localStorage.getItem('token');
+      try {
+        const departamento = await selecionarDepartamentoById(id);
+        alert(`Excluindo departamento com ID: ${departamento.id}, Nome: ${departamento.nome_departamento}`);
+
+        if (token) {
+          fetch(`http://localhost:8080/departamentos/${id}`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            }
+          })
+            .then(response => response.json())
+            .then(data => {
+              if (data.cod === 200) {
+                alert("Departamento excluído com sucesso!");
+                preencherTabela(data.departamentos);  
+              } else {
+                alert('Erro: ' + data.msg);
+              }
+            })
+            .catch(error => {
+              console.error('Erro ao excluir departamento:', error);
+              alert('Erro ao tentar excluir o departamento.');
+            });
+        } else {
+          alert('Token não encontrado. Por favor, faça login.');
+        }
+      } catch (error) {
+        alert('Erro ao buscar os dados do departamento: ' + error);
+      }
+    }
+
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      fetch('http://localhost:8080/departamentos', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);  
+          if (Array.isArray(data) && data.length > 0) {
+            preencherTabela(data); 
+          } else {
+            alert('Erro ao construir tabela: Não há departamentos para exibir.');
+          }
+        })
+        .catch(error => {
+          console.error('Erro ao buscar dados:', error);
+          alert('Erro ao tentar buscar dados dos departamentos.');
+        });
+
+    }
+
+    function mostrarFormularioAdicao() {
+      const formContainer = document.getElementById('form-container');
+      formContainer.style.display = 'block';
+
+
+      document.getElementById('edit-nome_departamento').value = '';
+      document.getElementById('edit-orcamento').value = '';
+      document.getElementById('edit-localizacao').value = '';
+      document.getElementById('edit-data_criacao').value = '';
+
+
+      document.getElementById('edit-form').onsubmit = function (e) {
+        e.preventDefault();
+
+        const nome_departamento = document.getElementById('edit-nome_departamento').value;
+        const orcamento = document.getElementById('edit-orcamento').value;
+        const localizacao = document.getElementById('edit-localizacao').value;
+        const data_criacao = document.getElementById('edit-data_criacao').value;
+
+        const token = localStorage.getItem('token');
+        if (token) {
+          fetch('http://localhost:8080/departamentos', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+              nome_departamento,
+              orcamento,
+              localizacao,
+              data_criacao
+            })
+          })
+            .then(response => response.json())
+            .then(data => {
+              if (data.cod === 201 || data.cod === 200) {
+                alert('Departamento adicionado com sucesso!');
+                preencherTabela(data.departamentos);
+                formContainer.style.display = 'none';
+              } else {
+                alert('Erro ao adicionar departamento: ' + data.msg);
+              }
+            })
+            .catch(error => {
+              console.error('Erro ao adicionar departamento:', error);
+              alert('Erro ao tentar adicionar departamento.');
+            });
+        } else {
+          alert('Token não encontrado. Por favor, faça login.');
+        }
+      };
+    }
+
+  </script>
+
+</body>
+
+</html>

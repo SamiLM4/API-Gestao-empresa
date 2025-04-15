@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Histórico de Cargos</title>
+  <style>
+    /* Estilo para a tabela e os botões */
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f4f6f9;
+      padding: 20px;
+    }
+
+    table {
+      width: 100%;
+      margin: 20px 0;
+      border-collapse: collapse;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    table th,
+    table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    table th {
+      background-color: #2563eb;
+      color: white;
+    }
+
+    table td {
+      color: #333;
+    }
+
+    .button-container {
+      display: flex;
+      gap: 10px;
+    }
+
+    .update-btn,
+    .delete-btn,
+    .add-btn {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      color: white;
+    }
+
+    .update-btn {
+      background-color: #4caf50;
+    }
+
+    .update-btn:hover {
+      background-color: #45a049;
+    }
+
+    .delete-btn {
+      background-color: #f44336;
+    }
+
+    .delete-btn:hover {
+      background-color: #e53935;
+    }
+
+    .add-btn {
+      background-color: #2563eb;
+    }
+
+    .add-btn:hover {
+      background-color: #1d4ed8;
+    }
+
+    .form-container {
+      display: none;
+      margin-top: 30px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .form-container button {
+      width: 100%;
+      padding: 10px;
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .form-container button:hover {
+      background-color: #1d4ed8;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-top: 20px;
+    }
+
+
+    .navbar {
+      background-color: #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      z-index: 10;
+    }
+
+    .navbar .logo {
+      font-size: 20px;
+      font-weight: bold;
+      color: #2563eb;
+    }
+
+    .navbar ul {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .navbar ul li a:hover {
+      background-color: #e0e7ff;
+      color: #2563eb;
+    }
+
+    .content {
+      padding: 100px 30px 30px 30px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .card h2 {
+      font-size: 24px;
+      color: #333;
+    }
+
+    .card p {
+      color: #666;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .navbar ul {
+        flex-direction: column;
+        background-color: #fff;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        display: none;
+      }
+
+      .navbar ul.show {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <div class="logo">Painel Administrativo</div>
+    <ul>
+      <li><a href="http://localhost:8080/html/funcionarios.html">Funcionários</a></li>
+      <li><a href="http://localhost:8080/html/perfil.html">Perfil</a></li>
+      <li><a href="http://localhost:8080/html/departamento.html">Departamentos</a></li>
+      <li><a href="http://localhost:8080/html/historicoCargos.html">Históricos de Cargos</a></li>
+      <li><a href="http://localhost:8080/html/dados.html">Relatórios</a></li>
+    </ul>
+  </nav>
+
+  <h1><br>Histórico de Cargos</h1>
+
+  <div style="text-align: center;">
+    <button class="add-btn" onclick="mostrarFormularioAdicionar()">Adicionar Histórico</button>
+  </div>
+
+  <table id="historico-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>ID Funcionário</th>
+        <th>Cargos Anteriores</th>
+        <th>Cargo Atual</th>
+        <th>Data Alteração</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <div class="form-container" id="form-container">
+    <h2 id="form-title">Adicionar Novo Histórico</h2>
+    <form id="edit-form">
+      <input type="number" id="edit-id" placeholder="ID" readonly />
+      <input type="number" id="edit-id_funcionario" placeholder="ID Funcionário" required />
+      <input type="text" id="edit-cargos_anteriores" placeholder="Cargos Anteriores" required />
+      <input type="text" id="edit-cargo_atual" placeholder="Cargo Atual" required />
+      <input type="date" id="edit-data_alteracao" required />
+      <button type="submit" id="form-submit-btn">Adicionar Histórico</button>
+    </form>
+  </div>
+
+  <script>
+
+    function mostrarFormularioAdicionar() {
+      const form = document.getElementById('form-container');
+      document.getElementById('form-title').innerText = "Adicionar Novo Histórico";
+      document.getElementById('form-submit-btn').innerText = "Adicionar Histórico";
+      form.style.display = 'block';
+
+      document.getElementById('edit-id').value = '';
+      document.getElementById('edit-id_funcionario').value = '';
+      document.getElementById('edit-cargos_anteriores').value = '';
+      document.getElementById('edit-cargo_atual').value = '';
+      document.getElementById('edit-data_alteracao').value = '';
+
+      document.getElementById('edit-form').onsubmit = function (e) {
+        e.preventDefault();
+        const token = localStorage.getItem('token');
+        if (token) {
+          fetch('http://localhost:8080/historicoCargos', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+              id_funcionario: Number(document.getElementById('edit-id_funcionario').value),
+              cargos_anteriores: document.getElementById('edit-cargos_anteriores').value,
+              cargo_atual: document.getElementById('edit-cargo_atual').value,
+              data_alteracao: document.getElementById('edit-data_alteracao').value
+            })
+          })
+            .then(resp => resp.json())
+            .then(data => {
+              if (data.cod === 200) {
+                alert('Histórico adicionado com sucesso!');
+                preencherTabela(data.historicoCargos);
+                form.style.display = 'none';
+              } else {
+                alert('Erro: ' + data.msg);
+              }
+            })
+            .catch(error => {
+              console.error('Erro ao adicionar histórico de cargo:', error);
+              alert('Erro ao adicionar o histórico de cargo.');
+            });
+        } else {
+          alert('Token não encontrado. Por favor, faça login.');
+        }
+      };
+    }
+
+    function atualizarHistorico(id) {
+      const form = document.getElementById('form-container');
+      document.getElementById('form-title').innerText = "Editar Histórico";
+      document.getElementById('form-submit-btn').innerText = "Salvar Alterações";
+      form.style.display = 'block';
+
+      selecionarHistoricoById(id).then(h => {
+        document.getElementById('edit-id').value = h.id;
+        document.getElementById('edit-id_funcionario').value = h.id_funcionario;
+        document.getElementById('edit-cargos_anteriores').value = h.cargos_anteriores;
+        document.getElementById('edit-cargo_atual').value = h.cargo_atual;
+        document.getElementById('edit-data_alteracao').value = h.data_alteracao;
+
+        document.getElementById('edit-form').onsubmit = function (e) {
+          e.preventDefault();
+          const token = localStorage.getItem('token');
+          if (token) {
+            fetch('http://localhost:8080/historicoCargos', {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+              },
+              body: JSON.stringify({
+                id: Number(document.getElementById('edit-id').value),
+                id_funcionario: Number(document.getElementById('edit-id_funcionario').value),
+                cargos_anteriores: document.getElementById('edit-cargos_anteriores').value,
+                cargo_atual: document.getElementById('edit-cargo_atual').value,
+                data_alteracao: document.getElementById('edit-data_alteracao').value
+              })
+            })
+              .then(resp => resp.json())
+              .then(data => {
+                if (data.cod === 200) {
+                  alert('Histórico atualizado com sucesso!');
+                  preencherTabela(data.historicoCargos);
+                  form.style.display = 'none';
+                } else {
+                  alert('Erro: ' + data.msg);
+                }
+              })
+              .catch(error => {
+                console.error('Erro ao atualizar histórico de cargo:', error);
+                alert('Erro ao atualizar o histórico de cargo.');
+              });
+          } else {
+            alert('Token não encontrado. Por favor, faça login.');
+          }
+        };
+      }).catch(msg => alert(msg));
+    }
+
+    function excluirHistorico(id) {
+      if (!confirm('Tem certeza que deseja excluir este histórico de cargo?')) return;
+
+      const token = localStorage.getItem('token');
+      if (token) {
+        fetch(`http://localhost:8080/historicoCargos/${id}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+          .then(resp => resp.json())
+          .then(data => {
+            if (data.cod === 200) {
+              alert('Histórico excluído com sucesso!');
+              preencherTabela(data.historicoCargos);
+            } else {
+              alert('Erro: ' + data.msg);
+            }
+          })
+          .catch(error => {
+            console.error('Erro ao excluir histórico:', error);
+            alert('Erro ao excluir histórico.');
+          });
+      } else {
+        alert('Token não encontrado. Por favor, faça login.');
+      }
+    }
+
+    function preencherTabela(historicos) {
+      const tbody = document.querySelector('#historico-table tbody');
+      tbody.innerHTML = '';
+      historicos.forEach(h => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${h.id}</td>
+          <td>${h.id_funcionario}</td>
+          <td>${h.cargos_anteriores}</td>
+          <td>${h.cargo_atual}</td>
+          <td>${h.data_alteracao}</td>
+          <td>
+            <div class="button-container">
+              <button class="update-btn" onclick="atualizarHistorico(${h.id})">Atualizar</button>
+              <button class="delete-btn" onclick="excluirHistorico(${h.id})">Excluir</button>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    function carregarHistoricos() {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert('Token não encontrado. Por favor, faça login.');
+        return;
+      }
+
+      fetch('http://localhost:8080/historicoCargos', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.cod === 200 && Array.isArray(data.historicoCargos)) {
+            preencherTabela(data.historicoCargos);
+          } else {
+            alert('Erro ao carregar históricos: ' + (data.msg || 'Resposta inesperada.'));
+          }
+        })
+        .catch(error => {
+          console.error('Erro ao carregar dados:', error);
+          alert('Erro ao carregar os dados do histórico de cargos.');
+        });
+    }
+
+    function selecionarHistoricoById(id) {
+      return new Promise((resolve, reject) => {
+        const token = localStorage.getItem('token');
+        if (token) {
+          fetch(`http://localhost:8080/historicoCargos/${id}`, {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          })
+            .then(resp => resp.json())
+            .then(data => {
+              if (data.cod === 200 && data.historico) {
+                resolve(data.historico);
+              } else {
+                reject('Histórico não encontrado.');
+              }
+            })
+            .catch(err => reject(err));
+        } else {
+          reject('Token não encontrado. Por favor, faça login.');
+        }
+      });
+    }
+    window.onload = carregarHistoricos;
+  </script>
+</body>
+
+</html>

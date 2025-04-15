@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Consulta de Departamento</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #e0f2fe, #f0f9ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    h1 {
+      color: #2563eb;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #2563eb;
+      color: white;
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #1e40af;
+    }
+
+    .resultado {
+      margin-top: 30px;
+      font-size: 16px;
+      color: #333;
+      background-color: #f8fafc;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 10;
+    }
+
+    .navbar .logo {
+      font-size: 20px;
+      font-weight: bold;
+      color: #2563eb;
+    }
+
+    .navbar ul {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .navbar ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .navbar ul li a:hover {
+      background-color: #e0e7ff;
+      color: #2563eb;
+    }
+
+    .content {
+      padding: 100px 30px 30px 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <div class="logo">Painel Administrativo</div>
+    <ul>
+      <li><a href="http://localhost:8080/html/funcionarios.html">Funcionários</a></li>
+      <li><a href="http://localhost:8080/html/perfil.html">Perfil</a></li>
+      <li><a href="http://localhost:8080/html/departamento.html">Departamentos</a></li>
+      <li><a href="http://localhost:8080/html/historicoCargos.html">Históricos de Cargos</a></li>
+      <li><a href="http://localhost:8080/html/dados.html">Relatórios</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h1><br>Consultar Departamento</h1>
+    <input type="text" id="departamento" placeholder="Digite o nome do departamento">
+    <button onclick="buscarDados()">Buscar</button>
+
+    <div id="resultado" class="resultado" style="display: none;"></div>
+  </div>
+
+  <script>
+    function buscarDados() {
+      const departamento = document.getElementById('departamento').value.trim();
+      const resultadoDiv = document.getElementById('resultado');
+      resultadoDiv.style.display = 'none';
+      resultadoDiv.innerHTML = '';
+
+      if (!departamento) {
+        alert('Por favor, digite o nome do departamento.');
+        return;
+      }
+
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert('Token não encontrado. Faça login para continuar.');
+        return;
+      }
+
+      fetch('http://localhost:8080/dados', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ departamento })
+      })
+        .then(res => res.json())
+        .then(data => {
+          resultadoDiv.style.display = 'block';
+
+          if (data.media_idade && data.media_salario && data.total_funcionarios !== undefined) {
+            resultadoDiv.innerHTML = `
+              <strong>${data.msg}</strong><br><br>
+              <p>Média de Idade: <strong>${data.media_idade} anos</strong></p>
+              <p>Média Salarial: <strong>R$ ${data.media_salario}</strong></p>
+              <p>Total de Funcionários: <strong>${data.total_funcionarios}</strong></p>
+            `;
+          } else if (data.resultado) {
+            resultadoDiv.innerHTML = `<p>${data.resultado}</p>`;
+          } else {
+            resultadoDiv.innerHTML = `<p>Erro inesperado ao buscar os dados.</p>`;
+          }
+        })
+        ;
+    }
+  </script>
+
+</body>
+
+</html>
