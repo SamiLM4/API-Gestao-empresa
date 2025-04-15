@@ -1,0 +1,736 @@
+type: collection.insomnia.rest/5.0
+name: teste_estagio_api_php
+meta:
+  id: wrk_4e80fa9236e2462ca4e34002bddb6480
+  created: 1744561032828
+  modified: 1744561032828
+collection:
+  - name: /funcionarios
+    meta:
+      id: fld_f5f629aa21684f9ebc7c41efcf916109
+      created: 1744569744669
+      modified: 1744575717102
+      sortKey: -1744569744669
+    children:
+      - url: http://localhost:8080/funcionarios
+        name: /funcionarios
+        meta:
+          id: req_a2e97a4ab7614a28a02ef637639fe032
+          created: 1744561039457
+          modified: 1744728988568
+          isPrivate: false
+          sortKey: -1744569749449
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nome": "Murilo",
+              "email": "murilo@example.com",
+              "cpf": "12345678901",
+              "cargo": "estagiario",
+              "salario": 1000,
+              "data_contratacao": "2025-05-30",
+              "departamento": null,
+              "funcionario_supervisor": null
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/10.3.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/funcionarios
+        name: /funcionarios
+        meta:
+          id: req_637db5a87f244d6481906b99ddbcac3b
+          created: 1744565749868
+          modified: 1744569754418
+          isPrivate: false
+          sortKey: -1744569749349
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/10.3.1
+            id: pair_2a704e99557946149397a5891a89c341
+          - id: pair_fd30736409534841bfd18186f454423a
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdCIsInN1YiI6ImFjZXNzb19zaXN0ZW1hIiwiaWF0IjoxNzQ0NTY5MzgwLCJleHAiOjE3NDcxNjEzODAsIm5iZiI6MTc0NDU2OTM4MCwianRpIjoiMTkwNjUzMmYwODQ5NjdlZDQ5NDJiN2QxNGQwNjg4MjAiLCJpZCI6MSwibm9tZSI6Ik11cmlsbyIsImVtYWlsIjoibXVyaWxvQGV4YW1wbGUuY29tIn0.BCOVIyvjAjo7k0jYG1jDj33XcEMt0RIWOadf0E5WObw
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/funcionarios/login
+        name: /funcionarios/login
+        meta:
+          id: req_a755eb2bfe1b43e9b9d6277e36064197
+          created: 1744566310208
+          modified: 1744728882267
+          isPrivate: false
+          sortKey: -1744569749249
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"email": "murilo@example.com",
+            	"cpf": "12345678901"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/10.3.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/funcionarios/2
+        name: /funcionarios/id
+        meta:
+          id: req_4d4de2e0a62a4dde9dca5ffec253275b
+          created: 1744567253001
+          modified: 1744726407394
+          isPrivate: false
+          sortKey: -1744569749149
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/10.3.1
+            id: pair_57c4957591b54cb0b6b8ff9545933d71
+          - id: pair_b701731a9fb742f495ed7bc0a4899cc7
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdCIsInN1YiI6ImFjZXNzb19zaXN0ZW1hIiwiaWF0IjoxNzQ0NTY5MzgwLCJleHAiOjE3NDcxNjEzODAsIm5iZiI6MTc0NDU2OTM4MCwianRpIjoiMTkwNjUzMmYwODQ5NjdlZDQ5NDJiN2QxNGQwNjg4MjAiLCJpZCI6MSwibm9tZSI6Ik11cmlsbyIsImVtYWlsIjoibXVyaWxvQGV4YW1wbGUuY29tIn0.BCOVIyvjAjo7k0jYG1jDj33XcEMt0RIWOadf0E5WObw
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/funcionarios
+        name: /funcionarios/id
+        meta:
+          id: req_f56a5a1e1056400cb89e3ac61eb51eec
+          created: 1744567868698
+          modified: 1744726419425
+          isPrivate: false
+          sortKey: -1744569749049
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            	{
+            		"id": 2,
+            		"nome": "Luiz",
+            		"email": "murilo@example.com",
+            		"cpf": "12345678901",
+            		"cargo": "estagiario",
+            		"salario": 1000,
+            		"data_contratacao": "2025-05-30",
+            		"departamento": null,
+            		"funcionario_supervisor": null
+            	}
+        headers:
+          - name: Content-Type
+            value: application/json
+            id: pair_fbe1472387e049bdb470c86abfbabb39
+          - name: User-Agent
+            value: insomnia/10.3.1
+            id: pair_1d23bfd6ddee4f7285894788c575ead1
+          - id: pair_7dfdf210091a4f0bba61c0b082a4c4bb
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdCIsInN1YiI6ImFjZXNzb19zaXN0ZW1hIiwiaWF0IjoxNzQ0NjQwMTcxLCJleHAiOjE3NDcyMzIxNzEsIm5iZiI6MTc0NDY0MDE3MSwianRpIjoiYjcwOGE3YjVhZTJhMjkwNTg1ZDU4MTNiOWMyNzNkMTgiLCJpZCI6Miwibm9tZSI6Ik11cmlsbyIsImVtYWlsIjoibXVyaWxvQGV4YW1wbGUuY29tIn0.BCcMG4T6fXWx4Xm7RYzM74aQoLn8JpH7NtL1LQwRGAM
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/funcionarios/2
+        name: /funcionarios/id
+        meta:
+          id: req_45556c510a1e4a8cae5f0f1cc9d541b1
+          created: 1744569527410
+          modified: 1744726501370
+          isPrivate: false
+          sortKey: -1744569748949
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/10.3.1
+            id: pair_90478ceda099408a894beba74ce8ba90
+          - id: pair_1615a720cfc748ca8679b1ca634e6b8d
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdCIsInN1YiI6ImFjZXNzb19zaXN0ZW1hIiwiaWF0IjoxNzQ0NTY5MzgwLCJleHAiOjE3NDcxNjEzODAsIm5iZiI6MTc0NDU2OTM4MCwianRpIjoiMTkwNjUzMmYwODQ5NjdlZDQ5NDJiN2QxNGQwNjg4MjAiLCJpZCI6MSwibm9tZSI6Ik11cmlsbyIsImVtYWlsIjoibXVyaWxvQGV4YW1wbGUuY29tIn0.BCOVIyvjAjo7k0jYG1jDj33XcEMt0RIWOadf0E5WObw
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: /departamentos
+    meta:
+      id: fld_2c602f11e83d4aebb5e8e8d14195df04
+      created: 1744573498251
+      modified: 1744574342749
+      sortKey: -1744573498251
+    children:
+      - url: http://localhost:8080/departamentos
+        name: /departamentos
+        meta:
+          id: req_5b8e7a6b57144851acfa67c99bfcff40
+          created: 1744573520266
+          modified: 1744726790247
+          isPrivate: false
+          sortKey: -1744573520266
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nome_departamento": "rh",
+            	"orcamento": 1000,
+            	"localizacao": "Rua 123 n 123",
+            	"data_criacao": "2025-05-30"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+            id: pair_9fd6a332450d4e869acc530865f536e2
+          - name: User-Agent
+            value: insomnia/10.3.1
+            id: pair_b4e0e10927094e1b93447a4c56480dbb
+          - id: pair_6adae14cc12d4909a1519111211cf30a
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdCIsInN1YiI6ImFjZXNzb19zaXN0ZW1hIiwiaWF0IjoxNzQ0NjQwMTcxLCJleHAiOjE3NDcyMzIxNzEsIm5iZiI6MTc0NDY0MDE3MSwianRpIjoiYjcwOGE3YjVhZTJhMjkwNTg1ZDU4MTNiOWMyNzNkMTgiLCJpZCI6Miwibm9tZSI6Ik11cmlsbyIsImVtYWlsIjoibXVyaWxvQGV4YW1wbGUuY29tIn0.BCcMG4T6fXWx4Xm7RYzM74aQoLn8JpH7NtL1LQwRGAM
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "http://localhost:8080/departamentos  "
+        name: /departamentos
+        meta:
+          id: req_f78a5773e1534b2ead637c02f4e4a32b
+          created: 1744574032371
+          modified: 1744640640284
+          isPrivate: false
+          sortKey: -1744574032371
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/10.3.1
+            id: pair_8a55ae645ba34e1ba7f8a419009ffb44
+          - id: pair_837a447e4f2a4c758b3af9644db93623
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdCIsInN1YiI6ImFjZXNzb19zaXN0ZW1hIiwiaWF0IjoxNzQ0NjQwMTcxLCJleHAiOjE3NDcyMzIxNzEsIm5iZiI6MTc0NDY0MDE3MSwianRpIjoiYjcwOGE3YjVhZTJhMjkwNTg1ZDU4MTNiOWMyNzNkMTgiLCJpZCI6Miwibm9tZSI6Ik11cmlsbyIsImVtYWlsIjoibXVyaWxvQGV4YW1wbGUuY29tIn0.BCcMG4T6fXWx4Xm7RYzM74aQoLn8JpH7NtL1LQwRGAM
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/departamentos/1
+        name: /departamentos/id
+        meta:
+          id: req_98e3008638f747c6b14d546c1233e517
+          created: 1744574058872
+          modified: 1744726658458
+          isPrivate: false
+          sortKey: -1744574058872
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/10.3.1
+            id: pair_5a55e825cfee48feba99f06f6157fc9d
+          - id: pair_ad08247294fa45fa8e6a5458439fa93a
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdCIsInN1YiI6ImFjZXNzb19zaXN0ZW1hIiwiaWF0IjoxNzQ0NjQwMTcxLCJleHAiOjE3NDcyMzIxNzEsIm5iZiI6MTc0NDY0MDE3MSwianRpIjoiYjcwOGE3YjVhZTJhMjkwNTg1ZDU4MTNiOWMyNzNkMTgiLCJpZCI6Miwibm9tZSI6Ik11cmlsbyIsImVtYWlsIjoibXVyaWxvQGV4YW1wbGUuY29tIn0.BCcMG4T6fXWx4Xm7RYzM74aQoLn8JpH7NtL1LQwRGAM
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/departamentos
+        name: /departamentos
+        meta:
+          id: req_50154ab8adb542b09b4ee0866468efc7
+          created: 1744574086744
+          modified: 1744640705613
+          isPrivate: false
+          sortKey: -1744574086744
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"id": 1,
+            	"nome_departamento": "RH",
+            	"orcamento": 1000,
+            	"localizacao": "Rua 123 n 123",
+            	"data_criacao": "2025-05-30"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+            id: pair_19ddd337396d41298913f6c11e3f1782
+          - name: User-Agent
+            value: insomnia/10.3.1
+            id: pair_3ddcb138507e43ab83c83f28c7734cc6
+          - id: pair_05288d3e2e5c4c3bb4ea2360b6459b9e
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdCIsInN1YiI6ImFjZXNzb19zaXN0ZW1hIiwiaWF0IjoxNzQ0NjQwMTcxLCJleHAiOjE3NDcyMzIxNzEsIm5iZiI6MTc0NDY0MDE3MSwianRpIjoiYjcwOGE3YjVhZTJhMjkwNTg1ZDU4MTNiOWMyNzNkMTgiLCJpZCI6Miwibm9tZSI6Ik11cmlsbyIsImVtYWlsIjoibXVyaWxvQGV4YW1wbGUuY29tIn0.BCcMG4T6fXWx4Xm7RYzM74aQoLn8JpH7NtL1LQwRGAM
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/departamentos/1
+        name: /departamentos/id
+        meta:
+          id: req_6fe711902e364848b8bda7e6384d9b0d
+          created: 1744574311972
+          modified: 1744640910879
+          isPrivate: false
+          sortKey: -1744574311972
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/10.3.1
+            id: pair_bee736ad55754707a07b6da7a4c1c671
+          - id: pair_d8363eba40494708b38133979754955f
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdCIsInN1YiI6ImFjZXNzb19zaXN0ZW1hIiwiaWF0IjoxNzQ0NjQwMTcxLCJleHAiOjE3NDcyMzIxNzEsIm5iZiI6MTc0NDY0MDE3MSwianRpIjoiYjcwOGE3YjVhZTJhMjkwNTg1ZDU4MTNiOWMyNzNkMTgiLCJpZCI6Miwibm9tZSI6Ik11cmlsbyIsImVtYWlsIjoibXVyaWxvQGV4YW1wbGUuY29tIn0.BCcMG4T6fXWx4Xm7RYzM74aQoLn8JpH7NtL1LQwRGAM
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: /perfis
+    meta:
+      id: fld_db47be2149e444f8b64951e909ded15c
+      created: 1744574871622
+      modified: 1744638885715
+      sortKey: -1744574871622
+    children:
+      - url: http://localhost:8080/perfis
+        name: /perfis
+        meta:
+          id: req_f93723794b664aa0ad86d0dfa9e1374e
+          created: 1744574892408
+          modified: 1744726709344
+          isPrivate: false
+          sortKey: -1744574892408
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |
+            {
+              "id": 1,
+              "id_funcionario": 1,
+              "idade": 50,
+              "endereco": "Rua Exemplo, 123",
+              "telefone": "1234567890",
+              "genero": "Macho",
+              "estado_civil": "Casado"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+            id: pair_7966c53ef177403eb59e4db28f18c41f
+          - name: User-Agent
+            value: insomnia/10.3.1
+            id: pair_9186a090b64a4704ae9049d467a7f3ef
+          - id: pair_f158f8039ad8434c8600598c7fac0ee7
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdCIsInN1YiI6ImFjZXNzb19zaXN0ZW1hIiwiaWF0IjoxNzQ0NjQwMTcxLCJleHAiOjE3NDcyMzIxNzEsIm5iZiI6MTc0NDY0MDE3MSwianRpIjoiYjcwOGE3YjVhZTJhMjkwNTg1ZDU4MTNiOWMyNzNkMTgiLCJpZCI6Miwibm9tZSI6Ik11cmlsbyIsImVtYWlsIjoibXVyaWxvQGV4YW1wbGUuY29tIn0.BCcMG4T6fXWx4Xm7RYzM74aQoLn8JpH7NtL1LQwRGAM
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/perfis
+        name: /perfis
+        meta:
+          id: req_8d3f50d0300447f4bc019b619f7a53ea
+          created: 1744574895790
+          modified: 1744726841198
+          isPrivate: false
+          sortKey: -1744574895790
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "id_funcionario": 3,
+              "idade": 30,
+              "endereco": "Rua Exemplo, 123",
+              "telefone": 1234567890.00,
+              "genero": "Masculino",
+              "estado_civil": "Solteiro"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+            id: pair_dcbdbc7c905e49b991053f2a8feece7d
+          - name: User-Agent
+            value: insomnia/10.3.1
+            id: pair_f824915f84fd4188878a179dceaa4baa
+          - id: pair_54375bf1a9bf4ee28c4f8aa896cef2d4
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdCIsInN1YiI6ImFjZXNzb19zaXN0ZW1hIiwiaWF0IjoxNzQ0NjQwMTcxLCJleHAiOjE3NDcyMzIxNzEsIm5iZiI6MTc0NDY0MDE3MSwianRpIjoiYjcwOGE3YjVhZTJhMjkwNTg1ZDU4MTNiOWMyNzNkMTgiLCJpZCI6Miwibm9tZSI6Ik11cmlsbyIsImVtYWlsIjoibXVyaWxvQGV4YW1wbGUuY29tIn0.BCcMG4T6fXWx4Xm7RYzM74aQoLn8JpH7NtL1LQwRGAM
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/perfis/1
+        name: /perfis/id
+        meta:
+          id: req_e1470d1319da42e997d7132bfc359dea
+          created: 1744574908625
+          modified: 1744726724024
+          isPrivate: false
+          sortKey: -1744574908625
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/10.3.1
+            id: pair_ba785f364b6b42eebcff1fff1d4ac68c
+          - id: pair_2f6ff40332244633bef496e8f4bb6fbb
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdCIsInN1YiI6ImFjZXNzb19zaXN0ZW1hIiwiaWF0IjoxNzQ0NjQwMTcxLCJleHAiOjE3NDcyMzIxNzEsIm5iZiI6MTc0NDY0MDE3MSwianRpIjoiYjcwOGE3YjVhZTJhMjkwNTg1ZDU4MTNiOWMyNzNkMTgiLCJpZCI6Miwibm9tZSI6Ik11cmlsbyIsImVtYWlsIjoibXVyaWxvQGV4YW1wbGUuY29tIn0.BCcMG4T6fXWx4Xm7RYzM74aQoLn8JpH7NtL1LQwRGAM
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/perfis/1
+        name: /perfis/id
+        meta:
+          id: req_aea5f41be36a4369bbb0e654c90f7a5f
+          created: 1744574910616
+          modified: 1744726695922
+          isPrivate: false
+          sortKey: -1744574910616
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/10.3.1
+            id: pair_0f5e864e19564bc097940a47ab345d8b
+          - id: pair_a0d20c808ad345f39ad490456b224b2d
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdCIsInN1YiI6ImFjZXNzb19zaXN0ZW1hIiwiaWF0IjoxNzQ0NTc2MTQ5LCJleHAiOjE3NDcxNjgxNDksIm5iZiI6MTc0NDU3NjE0OSwianRpIjoiYzUxN2UwYWIwNzUxNzhhMGI1YzQ3MWRmZjU2MzJhMGYiLCJpZCI6MSwibm9tZSI6Ik11cmlsbyIsImVtYWlsIjoibXVyaWxvQGV4YW1wbGUuY29tIn0.MVm6RjW777FJV8nUWggFl03EYA10fmd0qqPdYa_OOnk
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/perfis
+        name: /perfis
+        meta:
+          id: req_68ce10b0f0b64702a9444d717318bd65
+          created: 1744574913109
+          modified: 1744576178958
+          isPrivate: false
+          sortKey: -1744574913109
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/10.3.1
+            id: pair_98819a8d33894d13bcaecc4595dd3198
+          - id: pair_705af6f741f1453a99dfdca1a03f5712
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdCIsInN1YiI6ImFjZXNzb19zaXN0ZW1hIiwiaWF0IjoxNzQ0NTc2MTQ5LCJleHAiOjE3NDcxNjgxNDksIm5iZiI6MTc0NDU3NjE0OSwianRpIjoiYzUxN2UwYWIwNzUxNzhhMGI1YzQ3MWRmZjU2MzJhMGYiLCJpZCI6MSwibm9tZSI6Ik11cmlsbyIsImVtYWlsIjoibXVyaWxvQGV4YW1wbGUuY29tIn0.MVm6RjW777FJV8nUWggFl03EYA10fmd0qqPdYa_OOnk
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: /historicoCargos
+    meta:
+      id: fld_d1d5a783abdd4f1a9fe81d4589609a8d
+      created: 1744638000770
+      modified: 1744638000770
+      sortKey: -1744638000770
+    children:
+      - url: http://localhost:8080/historicoCargos/1
+        name: /historicoCargos/id
+        meta:
+          id: req_afe93c660ee247f3b726e6efcc583ed4
+          created: 1744638005213
+          modified: 1744726771023
+          isPrivate: false
+          sortKey: -1744638005213
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+            id: pair_13a671c3e23341f28afe460709a62a20
+          - id: pair_3228d8d24f904d05b3fd5cd67eba151f
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdCIsInN1YiI6ImFjZXNzb19zaXN0ZW1hIiwiaWF0IjoxNzQ0NjQwMTcxLCJleHAiOjE3NDcyMzIxNzEsIm5iZiI6MTc0NDY0MDE3MSwianRpIjoiYjcwOGE3YjVhZTJhMjkwNTg1ZDU4MTNiOWMyNzNkMTgiLCJpZCI6Miwibm9tZSI6Ik11cmlsbyIsImVtYWlsIjoibXVyaWxvQGV4YW1wbGUuY29tIn0.BCcMG4T6fXWx4Xm7RYzM74aQoLn8JpH7NtL1LQwRGAM
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/historicoCargos
+        name: /historicoCargos
+        meta:
+          id: req_b49a7d38ede44a2a9dac5e0933ad086b
+          created: 1744638006999
+          modified: 1744726756508
+          isPrivate: false
+          sortKey: -1744638006999
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |
+            {
+              "id": 1,
+              "id_funcionario": 1,
+              "cargos_anteriores": "Estagiário, Assistente",
+              "cargo_atual": "Analista",
+              "data_alteracao": "2025-04-14"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+            id: pair_ac4217e36c444b3b8e1690bca45ca00d
+          - name: User-Agent
+            value: insomnia/11.0.2
+            id: pair_c5c73514a60845429f00412b188192f9
+          - id: pair_c7e62e78aa0d4fe39f9289e9f89b5eb9
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdCIsInN1YiI6ImFjZXNzb19zaXN0ZW1hIiwiaWF0IjoxNzQ0NjQwMTcxLCJleHAiOjE3NDcyMzIxNzEsIm5iZiI6MTc0NDY0MDE3MSwianRpIjoiYjcwOGE3YjVhZTJhMjkwNTg1ZDU4MTNiOWMyNzNkMTgiLCJpZCI6Miwibm9tZSI6Ik11cmlsbyIsImVtYWlsIjoibXVyaWxvQGV4YW1wbGUuY29tIn0.BCcMG4T6fXWx4Xm7RYzM74aQoLn8JpH7NtL1LQwRGAM
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/historicoCargos
+        name: /historicoCargos
+        meta:
+          id: req_1ac69aa5baf947f58fb8e7ac4bdeb61c
+          created: 1744638008411
+          modified: 1744726738166
+          isPrivate: false
+          sortKey: -1744638008411
+        method: POST
+        body:
+          mimeType: application/json
+          text: |
+            {
+              "id_funcionario": 1,
+              "cargos_anteriores": "Auxiliar, Analista Jr",
+              "cargo_atual": "Analista Pleno",
+              "data_alteracao": "2025-04-14"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+            id: pair_66b833bb4db446068d1e0d9a44b7e704
+          - name: User-Agent
+            value: insomnia/11.0.2
+            id: pair_6be6d0e815a2442f933f51ffa3439e32
+          - id: pair_340a710e3e0646dba5aabca5e144d967
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdCIsInN1YiI6ImFjZXNzb19zaXN0ZW1hIiwiaWF0IjoxNzQ0NjQwMTcxLCJleHAiOjE3NDcyMzIxNzEsIm5iZiI6MTc0NDY0MDE3MSwianRpIjoiYjcwOGE3YjVhZTJhMjkwNTg1ZDU4MTNiOWMyNzNkMTgiLCJpZCI6Miwibm9tZSI6Ik11cmlsbyIsImVtYWlsIjoibXVyaWxvQGV4YW1wbGUuY29tIn0.BCcMG4T6fXWx4Xm7RYzM74aQoLn8JpH7NtL1LQwRGAM
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/historicoCargos/1
+        name: /historicoCargos/id
+        meta:
+          id: req_833beecb39134f6fa9158a27c2448a0a
+          created: 1744638010817
+          modified: 1744726746953
+          isPrivate: false
+          sortKey: -1744638010817
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+            id: pair_0fc3013f30ad42439e8885f806263d99
+          - id: pair_6a06b7bf68af4e509090c5db13b4ec97
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdCIsInN1YiI6ImFjZXNzb19zaXN0ZW1hIiwiaWF0IjoxNzQ0NjM4OTI1LCJleHAiOjE3NDcyMzA5MjUsIm5iZiI6MTc0NDYzODkyNSwianRpIjoiMzEyNjU3NjVmM2U0NmIyMmVhMWExZjU2ZTE5ZTMyMTIiLCJpZCI6Miwibm9tZSI6Ik11cmlsbyIsImVtYWlsIjoibXVyaWxvQGV4YW1wbGUuY29tIn0.ziIcSD_NBABGsobZwajISZv2jstRMQN7DNNQgWPLtks
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/historicoCargos
+        name: /historicoCargos
+        meta:
+          id: req_4a9aeeb597ec45b4a0a4d9e9c7afb755
+          created: 1744638012338
+          modified: 1744638984781
+          isPrivate: false
+          sortKey: -1744638012338
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+            id: pair_2dfe2c59579946668e550c5990e371e6
+          - id: pair_3cae2457fcec44db949d6851a8b58dd2
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdCIsInN1YiI6ImFjZXNzb19zaXN0ZW1hIiwiaWF0IjoxNzQ0NjM4OTI1LCJleHAiOjE3NDcyMzA5MjUsIm5iZiI6MTc0NDYzODkyNSwianRpIjoiMzEyNjU3NjVmM2U0NmIyMmVhMWExZjU2ZTE5ZTMyMTIiLCJpZCI6Miwibm9tZSI6Ik11cmlsbyIsImVtYWlsIjoibXVyaWxvQGV4YW1wbGUuY29tIn0.ziIcSD_NBABGsobZwajISZv2jstRMQN7DNNQgWPLtks
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - url: http://localhost:8080/dados
+    name: /dados
+    meta:
+      id: req_03f2557c4fb94944bbe45d0d75889b06
+      created: 1744726953809
+      modified: 1744735954126
+      isPrivate: false
+      sortKey: -1744726953809
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "departamento": "Recursos Humanos"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.0.2
+        id: pair_a9ae671c8d4d41d8a241e5f1c4bd120d
+      - id: pair_dbdcd0d077df49d19d60a1d17424791c
+        name: Authorization
+        value: Bearer
+          eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdCIsInN1YiI6ImFjZXNzb19zaXN0ZW1hIiwiaWF0IjoxNzQ0NzI2MzgyLCJleHAiOjE3NDczMTgzODIsIm5iZiI6MTc0NDcyNjM4MiwianRpIjoiM2ExNzM2MDczODM3MDgzYTg3MDY1NDY1NDJlY2U1YTAiLCJpZCI6MSwibm9tZSI6Ik11cmlsbyIsImVtYWlsIjoibXVyaWxvQGV4YW1wbGUuY29tIn0.obPWiR7fWbABUKjdeYjSxes_bVqLFv9uf9_YaVGOO-g
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_be2fcc190a4d6d1e070f08bfc5b778ec92f03056
+    created: 1744561032830
+    modified: 1744561032830
+environments:
+  name: Base Environment
+  meta:
+    id: env_be2fcc190a4d6d1e070f08bfc5b778ec92f03056
+    created: 1744561032830
+    modified: 1744561032830
+    isPrivate: false

@@ -46,6 +46,8 @@ CREATE TABLE historico_cargos (
 	FOREIGN KEY historico_cargos(id_funcionario) REFERENCES funcionarios(id)
 );
 
+insert into funcionarios (nome, email, cpf, cargo, salario, data_contratacao) values ('ADM', 'adm@example.com', '12345678901', 'administrador', 1000, '2025-04-15');
+
 /*
 	
 select * from funcionarios;
