@@ -26,6 +26,8 @@ Com tudo instalado, podemos começar os preparativos.
 
     Abra o XAMPP e ligue o "Apache" e "MySQL".
 
+    Os arquivos do projeto deve estar na raiz da pasta ./xampp/htdcos
+
 ### observação 1.1
     De preferência à utilize a porta "localhost:8080" no Apache, para isso, clique em "Config" do Apache -> procure por "Listen 80" e altere para "Listen 8080".
 
