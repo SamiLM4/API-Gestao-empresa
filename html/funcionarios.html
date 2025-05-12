@@ -353,6 +353,7 @@
           alert(error);
         }
         );
+        location.reload();
     }
 
 
@@ -420,6 +421,7 @@
       } catch (error) {
         alert('Erro ao buscar os dados do funcionário: ' + error);
       }
+      location.reload();
     }
 
     const token = localStorage.getItem('token');

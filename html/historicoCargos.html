@@ -344,6 +344,7 @@
           }
         };
       }).catch(msg => alert(msg));
+      location.reload();
     }
 
     function excluirHistorico(id) {
@@ -373,6 +374,7 @@
       } else {
         alert('Token não encontrado. Por favor, faça login.');
       }
+      location.reload();
     }
 
     function preencherTabela(historicos) {

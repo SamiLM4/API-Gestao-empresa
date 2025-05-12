@@ -335,6 +335,7 @@
         .catch(error => {
           alert(error);
         });
+        location.reload();
     }
 
     function selecionarPerfilById(id) {
@@ -399,6 +400,7 @@
       } catch (error) {
         alert('Erro ao buscar os dados do perfil: ' + error);
       }
+      location.reload();
     }
 
     const token = localStorage.getItem('token');
@@ -483,6 +485,7 @@
           alert('Token não encontrado. Por favor, faça login.');
         }
       };
+      location.reload();
     }
 
   </script>
