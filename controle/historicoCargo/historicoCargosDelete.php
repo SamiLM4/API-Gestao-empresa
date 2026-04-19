@@ -23,7 +23,7 @@ if ($meutoken->validarToken($autorization) == true) {
 
 
         if ($id_historico == '' || !isset($id_historico)) {
-            $resposta['cod'] = 3;
+            $resposta['cod'] = 400;
             $resposta['msg'] = "id nao pode ser vazio";
             exit();
         }
@@ -39,8 +39,7 @@ if ($meutoken->validarToken($autorization) == true) {
         $historico = new HistoricoCargo();
         $historico->setId($id_historico);
         if ($historico->delete()) {
-            header("HTTP/1.1 204 No Content");
-            exit();
+            header("HTTP/1.1 200 OK"); echo json_encode(["cod" => 200, "msg" => "Excluido com sucesso"]); exit();
         } else {
             header("HTTP/1.1 500 Internal Server Error");
             echo json_encode([

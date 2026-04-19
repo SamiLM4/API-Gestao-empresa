@@ -32,8 +32,7 @@ if ($meutoken->validarToken($autorization) == true) {
         $departamento->setid($id);
 
         if ($departamento->delete()) {
-            header("HTTP/1.1 204 No Content");
-            exit();
+            header("HTTP/1.1 200 OK"); echo json_encode(["cod" => 200, "msg" => "Excluido com sucesso"]); exit();
         } else {
             header("HTTP/1.1 500 Internal Server Error");
             echo json_encode([

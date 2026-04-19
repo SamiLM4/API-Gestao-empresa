@@ -19,7 +19,7 @@ if ($meutoken->validarToken($autorization) == true) {
         $id = strip_tags($id);
         
         if ($id == '' || !isset($id)) {
-            $resposta['cod'] = 3;
+            $resposta['cod'] = 400;
             $resposta['msg'] = "Dados inválidos";
             exit();
         }

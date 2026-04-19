@@ -27,7 +27,7 @@ if ($meutoken->validarToken($autorization) == true) {
 
 
         if ($id == '' || !isset($id)) {
-            $resposta['cod'] = 3;
+            $resposta['cod'] = 400;
             $resposta['msg'] = "id nao pode ser vazio";
             exit();
         }
@@ -39,8 +39,8 @@ if ($meutoken->validarToken($autorization) == true) {
         if ($funcionario->delete()) {
             header("HTTP/1.1 200 OK");
             echo json_encode([
+                "cod" => 200,
                 "mensagem" => "funcionario excluído com sucesso.",
-                
             ]);
             exit(); 
         } else {

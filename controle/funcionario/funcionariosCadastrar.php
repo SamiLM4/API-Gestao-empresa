@@ -33,23 +33,23 @@ $funcionario_supervisor = strip_tags($funcionario_supervisor);
 
 
 if ($nome == '' || !isset($nome)) {
-    $resposta['cod'] = 3;
+    $resposta['cod'] = 400;
     $resposta['msg'] = "nome nao pode ser vazio";
     $verificador = 1;
 } else if ($email == '' || !isset($email)) {
-    $resposta['cod'] = 3;
+    $resposta['cod'] = 400;
     $resposta['msg'] = "email nao pode ser vazio";
     $verificador = 1;
 } else if ($cpf == '' || !isset($cpf)){
-    $resposta['cod'] = 3;
+    $resposta['cod'] = 400;
     $resposta['msg'] = "CPF nao pode ser vazio";
     $verificador = 1;
 } else if ($cargo == '' || !isset($cargo)){
-    $resposta['cod'] = 3;
+    $resposta['cod'] = 400;
     $resposta['msg'] = "cargo nao pode ser vazio";
     $verificador = 1;
 }   else if ($data_contratacao == '' || !isset($data_contratacao)){
-    $resposta['cod'] = 3;
+    $resposta['cod'] = 400;
     $resposta['msg'] = "data de contratação nao pode ser vazio";
     exit();
 }
@@ -73,7 +73,7 @@ if ($funcionario->cadastrar()) {
     ]);
 } else {
     echo json_encode([
-        "cod" => 556,
+        "cod" => 500,
         "msg" => "Erro ao cadastrar Funcionario",
         "Funcionario" => $funcionario
     ]);

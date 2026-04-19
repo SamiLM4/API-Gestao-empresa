@@ -4,6 +4,14 @@
 
 O projeto consiste em um modelo básico de site de gestão de empresa, em que é possivel criar, deletar e atualizar: funcionarios, seus respectivos perfil's e historico de cargo, e departamentos.
 
+![alt text](image-3.png)
+
+![alt text](image-4.png)
+
+![alt text](image-5.png)
+
+![alt text](image-6.png)
+
 ## Instrução de como usar
 
 ### Instalação 

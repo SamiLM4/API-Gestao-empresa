@@ -25,19 +25,19 @@ $resposta = array();
 $verificador = 0;
 
 if ($nome_departamento == '' || !isset($nome_departamento)) {
-    $resposta['cod'] = 3;
+    $resposta['cod'] = 400;
     $resposta['msg'] = "nome_departamento nao pode ser vazio";
     $verificador = 1;
 } else if ($orcamento == '' || !isset($orcamento)) {
-    $resposta['cod'] = 3;
+    $resposta['cod'] = 400;
     $resposta['msg'] = "orcamento nao pode ser vazio";
     $verificador = 1;
 } else if ($localizacao == '' || !isset($localizacao)){
-    $resposta['cod'] = 3;
+    $resposta['cod'] = 400;
     $resposta['msg'] = "localizacao nao pode ser vazio";
     $verificador = 1;
 } else if ($data_criacao == '' || !isset($data_criacao)){
-    $resposta['cod'] = 3;
+    $resposta['cod'] = 400;
     $resposta['msg'] = "data de criacao nao pode ser vazio";
     $verificador = 1;
 }
@@ -59,12 +59,12 @@ if ($meutoken->validarToken($autorization) == true) {
         $resultado = $departamento->update();
         if ($resultado == true) {
             header("HTTP/1.1 201 Created");
-            $resposta['cod'] = 4;
+            $resposta['cod'] = 200;
             $resposta['msg'] = "Atualizado com sucesso!!!";
             $resposta['Departamento'] = $departamento;
         } else {
             header("HTTP/1.1 500 Internal Server Error");
-            $resposta['cod'] = 5;
+            $resposta['cod'] = 500;
             $resposta['msg'] = "ERRO ao cadastrar o departamento";
         }
     }

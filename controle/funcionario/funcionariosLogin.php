@@ -27,7 +27,7 @@ $email = strip_tags($email);
 $cpf = strip_tags($cpf);
 
 if ($email == '' || ($cpf == '')) {
-    $resposta['cod'] = 3;
+    $resposta['cod'] = 400;
     $resposta['msg'] = "Dados inválidos";
     exit();
 }

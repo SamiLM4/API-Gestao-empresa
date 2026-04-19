@@ -29,33 +29,33 @@ $verificador = 0;
 
 
 if ($id_funcionario == '') {
-    $resposta['cod'] = 3;
+    $resposta['cod'] = 400;
     $resposta['msg'] = "ID do funcionário não pode ser vazio";
     $verificador = 1;
 } else if ($idade == '') {
-    $resposta['cod'] = 3;
+    $resposta['cod'] = 400;
     $resposta['msg'] = "Idade não pode ser vazia";
     $verificador = 1;
 } else if ($endereco == '') {
-    $resposta['cod'] = 3;
+    $resposta['cod'] = 400;
     $resposta['msg'] = "Endereço não pode ser vazio";
     $verificador = 1;
 } else if ($telefone == '') {
-    $resposta['cod'] = 3;
+    $resposta['cod'] = 400;
     $resposta['msg'] = "Telefone não pode ser vazio";
     $verificador = 1;
 } else if ($genero == '') {
-    $resposta['cod'] = 3;
+    $resposta['cod'] = 400;
     $resposta['msg'] = "Gênero não pode ser vazio";
     $verificador = 1;
 } else if ($estado_civil == '') {
-    $resposta['cod'] = 3;
+    $resposta['cod'] = 400;
     $resposta['msg'] = "Estado civil não pode ser vazio";
     $verificador = 1;
 }
 
 if (!is_numeric($idade)) {
-    $resposta['cod'] = 3;
+    $resposta['cod'] = 400;
     $resposta['msg'] = "Idade deve ser um número";
     $verificador = 1;
 }
@@ -81,12 +81,12 @@ if ($meutoken->validarToken($autorization) == true) {
         $resultado = $perfil->update();
         if ($resultado == true) {
             header("HTTP/1.1 201 Created");
-            $resposta['cod'] = 4;
+            $resposta['cod'] = 200;
             $resposta['msg'] = "Perfil atualizado com sucesso!";
             $resposta['perfil'] = $perfil->toArray(); 
         } else {
             header("HTTP/1.1 500 Internal Server Error");
-            $resposta['cod'] = 5;
+            $resposta['cod'] = 500;
             $resposta['msg'] = "Erro ao atualizar o perfil";
         }
     }

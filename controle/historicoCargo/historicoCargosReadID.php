@@ -32,7 +32,7 @@ if ($meutoken->validarToken($authorization) === true) {
 
 
         if ($id_historico == '' || !isset($id_historico)) {
-            $resposta['cod'] = 3;
+            $resposta['cod'] = 400;
             $resposta['msg'] = "id nao pode ser vazio";
             exit();
         }

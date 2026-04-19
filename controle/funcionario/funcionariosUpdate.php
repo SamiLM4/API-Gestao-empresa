@@ -38,7 +38,7 @@ if (
     $salario == '' || !isset($salario) ||
     $data_contratacao == '' || !isset($data_contratacao)
 ) {
-    $resposta['cod'] = 3;
+    $resposta['cod'] = 400;
     $resposta['msg'] = "Dados inválidos";
     echo json_encode($resposta);
     exit();
@@ -51,7 +51,7 @@ $verificador = 0;
 
 
 if (!is_numeric($id)) { 
-    $resposta['cod'] = 3;
+    $resposta['cod'] = 400;
     $resposta['msg'] = "id deve ser um número";
     $verificador = 1;
 }
@@ -76,13 +76,13 @@ if ($meutoken->validarToken($autorization) == true) {
 
         if ($resultado == true) {
             header("HTTP/1.1 201 Created");
-            $resposta['cod'] = 4;
+            $resposta['cod'] = 200;
             $resposta['msg'] = "Auteracao feita com sucesso!!!";
             //$resposta['Token'] = $tokenNovo;
 
         } else {
             header("HTTP/1.1 500 Internal Server Error");
-            $resposta['cod'] = 5;
+            $resposta['cod'] = 500;
             $resposta['msg'] = "ERRO ao atualizar funcionário";
         }
     }
